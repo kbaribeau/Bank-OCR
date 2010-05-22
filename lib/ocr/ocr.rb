@@ -33,6 +33,19 @@ class Ocr
 		dict.keys.each do |key| 
 			return key if dict[key].eql? number
 		end
-			
+	end
+
+	def checksum(number) 
+		checksum = 0
+		digit_list = number.to_s.chars.to_a.map {|x| x.to_i}
+		digit_list.insert(0, 0) while digit_list.length < 9
+		digit_list = digit_list.reverse
+
+		#checksum = checksum.inject_with_index(0) {|x, y, i} x + y * (i+1)}
+		(1..9).to_a.each do |index| 
+			checksum += (digit_list[index-1] * (index))
+		end
+
+		checksum % 11 == 0
 	end
 end

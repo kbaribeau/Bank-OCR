@@ -1,11 +1,12 @@
 require 'lib/ocr/ocr'
 require 'lib/ocr/numbers'
+#time spent: 2 hr (1 hr messing with ruby weirdness), + 1 hr
 
 describe Ocr do
 	ocr = Ocr.new
 	context "splitting" do
 		it "two boxed numbers" do
-			ocr.split(numbers_zero_one).should == [Numbers.zero, Numbers.one]
+			ocr.split(numbers_zero_thru_one).should == [Numbers.zero, Numbers.one]
 		end
 		it "three boxed numbers" do
 			ocr.split(numbers_zero_thru_two).should == [Numbers.zero, Numbers.one, Numbers.two]
@@ -45,7 +46,28 @@ describe Ocr do
 		end
 	end
 
-def numbers_zero_one 
+	context "checksumming" do
+		context "true case" do
+			[51, 123456789, 200800000, 333393333, 490067115, 490067719,
+			490867715, 490867715, 555655555, 559555555, 666566666, 686666666,
+			711111111, 777777177, 888886888, 888888880, 888888988, 899999999,
+			993999999, 999959999].each do |num|
+				it num.to_s do
+					ocr.checksum(num).should == true
+				end
+			end
+		end
+
+		context "false case" do
+			[664371495].each do |num|
+				it num.to_s do 
+					ocr.checksum(num).should == false
+				end
+			end
+		end
+	end
+
+def numbers_zero_thru_one 
 <<END 
  _     
 | |  | 
