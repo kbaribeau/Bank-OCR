@@ -1,6 +1,14 @@
 require 'lib/ocr/ocr'
 require 'lib/ocr/numbers'
-#time spent: 2 hr (1 hr messing with ruby weirdness), + 1 hr + .75 + 15 minutes typing out test cases
+=begin
+	time spent: 
+		2 hr (1 hr messing with ruby weirdness) -- split, 
+		1 hr --recognize + first pass at checksum
+		.75  --checksum
+		15 minutes -- typing out test cases for correct
+		25 minutes -- type out algorithm for correct
+
+=end
 
 describe Ocr do
 	ocr = Ocr.new

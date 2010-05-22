@@ -38,7 +38,7 @@ class Ocr
 
 	def checksum(number) 
 		checksum = 0
-		digit_list = number.to_s.chars.to_a.map {|x| x.to_i}
+		digit_list = number.to_s.chars.map {|x| x.to_i}
 		digit_list.insert(0, 0) while digit_list.length < 9
 		digit_list = digit_list.reverse
 
@@ -51,6 +51,28 @@ class Ocr
 	end
 
 	def correct(input)
+		errors = find_all_possible_scanner_errors(input)
+		p errors
+		errors.find {|x| checksum(x.to_i) }
+	end
 
+	def find_all_possible_scanner_errors(input) 
+		result = []
+		input.chars.each_with_index do |char, index|
+			if input[index] == " " then
+				result << string_replace_at(input, index, "|")
+				result << string_replace_at(input, index, "_")
+			end
+
+			result << string_replace_at(input, index, " ") if input[index] == "|" 
+			result << string_replace_at(input, index, " ") if input[index] == "_" 
+		end
+		result
+	end
+
+	def string_replace_at(str, index, char)
+		result = String.new(str)
+		result[index] = "|"
+		result
 	end
 end
