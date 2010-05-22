@@ -44,6 +44,9 @@ describe Ocr do
 		it "a nine" do
 			ocr.recognize(Numbers.nine).should == 9
 		end
+		it "an illegible number" do
+			ocr.recognize(illegible_number).should == '?'
+		end
 	end
 
 	context "checksumming" do
@@ -67,6 +70,13 @@ describe Ocr do
 		end
 	end
 
+def illegible_number
+<<END
+ _ 
+|_|
+ _ 
+END
+end
 def numbers_zero_thru_one 
 <<END 
  _     

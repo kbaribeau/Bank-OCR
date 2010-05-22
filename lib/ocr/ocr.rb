@@ -33,6 +33,7 @@ class Ocr
 		dict.keys.each do |key| 
 			return key if dict[key].eql? number
 		end
+		'?'
 	end
 
 	def checksum(number) 
