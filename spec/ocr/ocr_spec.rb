@@ -7,6 +7,7 @@ require 'lib/ocr/numbers'
 		.75  --checksum
 		2 hours 15 -- correct
 
+		TOTAL: ~6 hours
 
 		got burned by...
 			map vs map! (lost ~30 mins)
