@@ -41,7 +41,7 @@ class Ocr
 		digit_list.insert(0, 0) while digit_list.length < 9
 		digit_list = digit_list.reverse
 
-		#checksum = checksum.inject_with_index(0) {|x, y, i} x + y * (i+1)}
+		#checksum = checksum.inject_with_index(0) {|x, y, i| x + y * (i+1)}
 		(1..9).to_a.each do |index| 
 			checksum += (digit_list[index-1] * (index))
 		end
