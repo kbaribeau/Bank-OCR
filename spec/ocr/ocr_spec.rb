@@ -1,6 +1,6 @@
 require 'lib/ocr/ocr'
 require 'lib/ocr/numbers'
-#time spent: 2 hr (1 hr messing with ruby weirdness), + 1 hr + .75
+#time spent: 2 hr (1 hr messing with ruby weirdness), + 1 hr + .75 + 15 minutes typing out test cases
 
 describe Ocr do
 	ocr = Ocr.new
@@ -71,6 +71,36 @@ describe Ocr do
 		end
 	end
 
+	context "correcting scanner errors" do
+		context "when there are multiple solutions" do
+			xit "for 888888888" do
+				ocr.correct(nine_eights).should == ['888886888', '888888880', '888888988']
+			end
+			xit "for 555555555" do
+				ocr.correct(nine_fives).should == ['555655555', '559555555']
+			end
+			xit "for 666666666" do
+				ocr.correct(nine_sixes).should == ['665666666', '686666666']
+			end
+			xit "for 999999999" do
+				ocr.correct(nine_nines).should == ['899999999', '993999999', '999959999']
+			end
+		end
+
+		context "when there is a single solution" do
+			xit "for 123456789 with an extra -" do
+				ocr.correct(one_thru_nine_with_error).should == ['123456789']
+			end
+			xit "for 51 with a missing _" do
+				ocr.correct(fifty_one_with_error).should == ['000000051']
+			end
+			xit "for 490867715 with a missing |" do
+				ocr.correct(random_number_with_error).should == ['490867715']
+			end
+		end
+
+	end
+
 def illegible_number
 <<END
  _ 
@@ -90,7 +120,48 @@ def numbers_zero_thru_two
  _       _ 
 | |  |   _|
 |_|  |  |_ 
-
+END
+end
+def nine_eights
+<<END
+ _  _  _  _  _  _  _  _  _ 
+|_||_||_||_||_||_||_||_||_|
+|_||_||_||_||_||_||_||_||_|
+END
+end
+def nine_fives
+<<END
+ _  _  _  _  _  _  _  _  _ 
+|_ |_ |_ |_ |_ |_ |_ |_ |_ 
+ _| _| _| _| _| _| _| _| _|
+END
+end
+def nine_sixes
+<<END
+ _  _  _  _  _  _  _  _  _ 
+|_ |_ |_ |_ |_ |_ |_ |_ |_ 
+|_||_||_||_||_||_||_||_||_|
+END
+end
+def one_thru_nine_with_error
+<<END
+   _  _     _  _  _  _  _ 
+_| _| _||_||_ |_   ||_||_|
+ ||_  _|  | _||_|  ||_| _|
+END
+end
+def fifty_one_with_error
+<<END
+ _     _  _  _  _  _  _    
+| || || || || || || ||_   |
+|_||_||_||_||_||_||_| _|  |
+END
+end
+def random_number_with_error
+<<END
+    _  _  _  _  _  _     _ 
+|_||_|| ||_||_   |  |  | _ 
+  | _||_||_||_|  |  |  | _|
 END
 end
 end

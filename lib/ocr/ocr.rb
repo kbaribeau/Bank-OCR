@@ -49,4 +49,8 @@ class Ocr
 
 		checksum % 11 == 0
 	end
+
+	def correct(input)
+
+	end
 end
