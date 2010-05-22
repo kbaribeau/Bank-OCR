@@ -5,10 +5,7 @@ require 'lib/ocr/numbers'
 		2 hr (1 hr messing with ruby weirdness) -- split, 
 		1 hr --recognize + first pass at checksum
 		.75  --checksum
-		15 minutes -- typing out test cases for correct
-		25 minutes -- type out algorithm for correct
-		15 minutes -- debugging
-
+		2 hours 15 -- correct
 =end
 
 describe Ocr do
