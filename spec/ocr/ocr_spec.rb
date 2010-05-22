@@ -6,6 +6,19 @@ require 'lib/ocr/numbers'
 		1 hr --recognize + first pass at checksum
 		.75  --checksum
 		2 hours 15 -- correct
+
+
+		got burned by...
+			map vs map! (lost ~30 mins)
+			this weird thing (lost ~60 mins)
+			irb(main):089:0> a = ["a"]*3
+			=> ["a", "a", "a"]
+			irb(main):090:0> a[0] << "a"
+			=> "aa"
+			irb(main):091:0> a
+			=> ["aa", "aa", "aa"]
+			irb(main):092:0> 
+
 =end
 
 describe Ocr do
