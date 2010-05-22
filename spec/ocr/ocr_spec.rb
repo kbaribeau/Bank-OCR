@@ -1,6 +1,6 @@
 require 'lib/ocr/ocr'
 require 'lib/ocr/numbers'
-#time spent: 2 hr (1 hr messing with ruby weirdness), + 1 hr
+#time spent: 2 hr (1 hr messing with ruby weirdness), + 1 hr + .75
 
 describe Ocr do
 	ocr = Ocr.new
@@ -62,7 +62,8 @@ describe Ocr do
 		end
 
 		context "false case" do
-			[664371495].each do |num|
+			[664371495, 888888888, 555555555, 666666666, 999999999,
+			490067715].each do |num|
 				it num.to_s do 
 					ocr.checksum(num).should == false
 				end
