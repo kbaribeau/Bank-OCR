@@ -10,6 +10,7 @@ require 'lib/ocr/numbers'
 
 		got burned by...
 			map vs map! (lost ~30 mins)
+
 			this weird thing (lost ~60 mins)
 			irb(main):089:0> a = ["a"]*3
 			=> ["a", "a", "a"]
