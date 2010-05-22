@@ -1,7 +1,7 @@
 class Ocr 
 	def split(numbers)
 		lines = numbers.split("\n")
-		size = (lines[0].length / 4.0).ceil
+		size = (lines[0].length / 3.0).ceil
 		split_numbers = []
 		size.times { split_numbers << "" }
 
@@ -9,7 +9,7 @@ class Ocr
 			line_index = 0
 			split_numbers.each do |split_num|
 				split_num << line.slice(line_index, 3) << "\n" 
-				line_index += 4
+				line_index += 3
 			end
 		end
 		split_numbers
@@ -43,7 +43,7 @@ class Ocr
 		digit_list = digit_list.reverse
 
 		#checksum = checksum.inject_with_index(0) {|x, y, i| x + y * (i+1)}
-		(1..9).to_a.each do |index| 
+		(1..9).each do |index| 
 			checksum += (digit_list[index-1] * (index))
 		end
 
@@ -52,27 +52,32 @@ class Ocr
 
 	def correct(input)
 		errors = find_all_possible_scanner_errors(input)
-		p errors
-		errors.find {|x| checksum(x.to_i) }
+		errors.map! do |error| 
+			split(error).map {|num| recognize(num).to_s}.join
+		end
+		errors.find_all do |x| 
+			checksum(x.to_i) unless x.include?("?")
+		end.to_a
 	end
 
 	def find_all_possible_scanner_errors(input) 
-		result = []
-		input.chars.each_with_index do |char, index|
-			if input[index] == " " then
-				result << string_replace_at(input, index, "|")
-				result << string_replace_at(input, index, "_")
+		errors = []
+		(0..input.length-1).each do |index|
+			current_char = input[index].chr
+			if current_char == " " then
+				errors << string_replace_at(input, index, "|")
+				errors << string_replace_at(input, index, "_")
 			end
 
-			result << string_replace_at(input, index, " ") if input[index] == "|" 
-			result << string_replace_at(input, index, " ") if input[index] == "_" 
+			errors << string_replace_at(input, index, " ") if current_char == "|"
+			errors << string_replace_at(input, index, " ") if current_char == "_"
 		end
-		result
+		errors
 	end
 
 	def string_replace_at(str, index, char)
 		result = String.new(str)
-		result[index] = "|"
+		result[index] = char
 		result
 	end
 end
