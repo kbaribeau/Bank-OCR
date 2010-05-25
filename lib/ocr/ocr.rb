@@ -1,3 +1,11 @@
+class String
+	def replace_at(index, char)
+		result = String.new(self)
+		result[index] = char
+		result
+	end
+end
+
 class Ocr 
 	def split(numbers)
 		lines = numbers.split("\n")
@@ -61,19 +69,13 @@ class Ocr
 		(0..input.length-1).each do |index|
 			current_char = input[index].chr
 			if current_char == " " then
-				errors << string_replace_at(input, index, "|")
-				errors << string_replace_at(input, index, "_")
+				errors << input.replace_at(index, "|")
+				errors << input.replace_at(index, "_")
 			end
 
-			errors << string_replace_at(input, index, " ") if current_char == "|"
-			errors << string_replace_at(input, index, " ") if current_char == "_"
+			errors << input.replace_at(index, " ") if current_char == "|"
+			errors << input.replace_at(index, " ") if current_char == "_"
 		end
 		errors
-	end
-
-	def string_replace_at(str, index, char)
-		result = String.new(str)
-		result[index] = char
-		result
 	end
 end
