@@ -66,8 +66,7 @@ class Ocr
 
 	def find_all_possible_scanner_errors(input) 
 		errors = []
-		(0..input.length-1).each do |index|
-			current_char = input[index].chr
+		input.chars.each_with_index do |current_char, index|
 			if current_char == " " then
 				errors << input.replace_at(index, "|")
 				errors << input.replace_at(index, "_")
