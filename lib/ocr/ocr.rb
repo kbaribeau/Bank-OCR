@@ -16,24 +16,20 @@ class Ocr
 	end
 
 	def recognize(number)
-		lines = number.split("\n")
 		dict = {
-				0 => Numbers.zero,
-				1 => Numbers.one,
-				2 => Numbers.two,
-				3 => Numbers.three,
-				4 => Numbers.four,
-				5 => Numbers.five,
-				6 => Numbers.six,
-				7 => Numbers.seven,
-				8 => Numbers.eight,
-				9 => Numbers.nine
+				Numbers.zero => 0,
+				Numbers.one => 1,
+				Numbers.two => 2,
+				Numbers.three => 3,
+				Numbers.four => 4,
+				Numbers.five => 5,
+				Numbers.six => 6,
+				Numbers.seven => 7,
+				Numbers.eight => 8,
+				Numbers.nine => 9
 		}
 
-		dict.keys.each do |key| 
-			return key if dict[key].eql? number
-		end
-		'?'
+		dict[number] == nil ? '?' : dict[number]
 	end
 
 	def checksum(number) 
