@@ -1,27 +1,5 @@
 require 'lib/ocr/ocr'
 require 'lib/ocr/numbers'
-=begin
-	time spent: 
-		2 hr (1 hr messing with ruby weirdness) -- split, 
-		1 hr --recognize + first pass at checksum
-		.75  --checksum
-		2 hours 15 -- correct
-
-		TOTAL: ~6 hours
-
-		got burned by...
-			map vs map! (lost ~30 mins)
-
-			this weird thing (lost ~60 mins)
-			irb(main):089:0> a = ["a"]*3
-			=> ["a", "a", "a"]
-			irb(main):090:0> a[0] << "a"
-			=> "aa"
-			irb(main):091:0> a
-			=> ["aa", "aa", "aa"]
-			irb(main):092:0> 
-
-=end
 
 describe Ocr do
 	ocr = Ocr.new
