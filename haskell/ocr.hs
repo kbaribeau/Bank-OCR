@@ -14,19 +14,41 @@ module Ocr where
 							| x == eight = 8
 							| x == nine  = 9
 
-	test0 = TestCase (assertEqual "recognize zero" (recognize zero) 0)
-	test1 = TestCase (assertEqual "recognize one" (recognize one) 1)
-	test2 = TestCase (assertEqual "recognize two" (recognize two) 2)
-	test3 = TestCase (assertEqual "recognize three" (recognize three) 3)
-	test4 = TestCase (assertEqual "recognize four" (recognize four) 4)
-	test5 = TestCase (assertEqual "recognize five" (recognize five) 5)
-	test6 = TestCase (assertEqual "recognize six" (recognize six) 6)
-	test7 = TestCase (assertEqual "recognize seven" (recognize seven) 7)
-	test8 = TestCase (assertEqual "recognize eight" (recognize eight) 8)
-	test9 = TestCase (assertEqual "recognize nine" (recognize nine) 9)
-	tests = TestList [test0, test1, test2, test3, test4, test5, test6, test7, test8, test9]
+	rtest0 = TestCase (assertEqual "recognize zero" (recognize zero) 0)
+	rtest1 = TestCase (assertEqual "recognize one" (recognize one) 1)
+	rtest2 = TestCase (assertEqual "recognize two" (recognize two) 2)
+	rtest3 = TestCase (assertEqual "recognize three" (recognize three) 3)
+	rtest4 = TestCase (assertEqual "recognize four" (recognize four) 4)
+	rtest5 = TestCase (assertEqual "recognize five" (recognize five) 5)
+	rtest6 = TestCase (assertEqual "recognize six" (recognize six) 6)
+	rtest7 = TestCase (assertEqual "recognize seven" (recognize seven) 7)
+	rtest8 = TestCase (assertEqual "recognize eight" (recognize eight) 8)
+	rtest9 = TestCase (assertEqual "recognize nine" (recognize nine) 9)
 
-	main = runTestTT tests
+	--split :: String -> [String]
+	--split str = split2 str []
+
+	takeFirst str result | str == [] = result
+											 | otherwise = takeFirst str [x:result] where x
+
+	tf0 = TestCase (assertEqual "" (takeFirst zero_thru_one) zero)
+											
+
+	--stest0 = TestCase (assertEqual "split zero one" (split zero_thru_one) [zero, one])
+	tests = TestList [rtest0, rtest1, rtest2, rtest3, rtest4, rtest5, rtest6, rtest7, rtest8, rtest9]
+
+	--main = runTestTT tests
+	main = runTestTT TestList [tf0]
+
+	zero_thru_one = unlines [
+		" _    ",
+		"| |  |",
+		"|_|  |"]
+
+	zero_one = unlines [
+		" _ ", 
+		"| |", 
+		"|_|"] 
 
 	zero = unlines [
 		" _ ", 
