@@ -9,18 +9,19 @@ end
 class Ocr 
 	def split(numbers)
 		lines = numbers.split("\n")
-		size = (lines[0].length / 3.0).ceil
-		split_numbers = []
-		size.times { split_numbers << "" }
+		number_of_numbers = (lines[0].length / 3.0).ceil
+
+		result = []
+		number_of_numbers.times { result << "" }
 
 		lines.each_with_index do |line, index|
 			line_index = 0
-			split_numbers.each do |split_num|
+			result.each do |split_num|
 				split_num << line.slice(line_index, 3) << "\n" 
 				line_index += 3
 			end
 		end
-		split_numbers
+		result
 	end
 
 	def recognize(number)
