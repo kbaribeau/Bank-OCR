@@ -3,8 +3,6 @@ package com.kbaribeau;
 import java.util.HashMap;
 
 public class CharacterParser {
-    public static int ILLEGIBLE_DIGIT = -1;
-    
     private HashMap<String, Integer> charactersToDigitsMap = new HashMap<String, Integer>();
 
     public CharacterParser() {
